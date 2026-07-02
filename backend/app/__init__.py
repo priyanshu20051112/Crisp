@@ -20,7 +20,7 @@ def create_app():
     app.config['CACHE_TYPE']='redis'
     app.config['CACHE_REDIS_URL']=os.getenv('REDIS_URL')
     # app.config['CACHE_REDIS_PORT']=6379
-    app.config['RATELIMIT_STORAGE_URL']=os.getenv('RATE_LIMITER')
+    app.config['RATELIMIT_STORAGE_URI']=os.getenv('RATE_LIMITER')
     CORS(
     app,
     resources={
