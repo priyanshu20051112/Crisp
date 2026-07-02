@@ -8,7 +8,7 @@ export default function Hero() {
       </div>
 
       <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-        URL Shortener
+        Crisp
       </h1>
 
       <p className="mt-3 max-w-md text-balance text-sm text-gray-500 sm:text-base">
