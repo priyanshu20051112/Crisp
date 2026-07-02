@@ -18,8 +18,8 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI']=os.getenv("DATABASE_URL")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
     app.config['CACHE_TYPE']='redis'
-    app.config['CACHE_REDIS_HOST']=os.getenv('REDIS_HOST')
-    app.config['CACHE_REDIS_PORT']=6379
+    app.config['CACHE_REDIS_URL']=os.getenv('REDIS_URL')
+    # app.config['CACHE_REDIS_PORT']=6379
     app.config['RATELIMIT_STORAGE_URL']=os.getenv('RATE_LIMITER')
     CORS(
     app,
