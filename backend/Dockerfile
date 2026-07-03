@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 5000
 
-CMD ["gunicorn","-w","1","-b","0.0.0.0:5000","run:app"]
+CMD ["sh", "-c", "python -m flask db upgrade && gunicorn -w 1 -b 0.0.0.0:${PORT:-5000} run:app"]
