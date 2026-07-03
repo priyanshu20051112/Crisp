@@ -3,7 +3,7 @@ from app import db ,cache,limiter
 from app.models import url
 health=Blueprint('health',__name__)
 @health.route("/health")
-def health():
+def health_route():
     try:
         db.session.execute(db.text("SELECT 1"))
         cache.set("health", "ok", timeout=5)

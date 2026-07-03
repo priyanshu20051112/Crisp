@@ -5,6 +5,9 @@ from flask_caching import Cache
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_cors import CORS
+from flask_migrate import Migrate
+from dotenv import load_dotenv
+load_dotenv()
 import os
 limiter= Limiter(
     get_remote_address,
@@ -12,6 +15,7 @@ limiter= Limiter(
 )
 db=SQLAlchemy()
 cache=Cache()
+migrate=Migrate()
 def create_app():
     app= Flask(__name__)
     app.config['SECRET_KEY']=os.getenv('SECRET_KEY')
@@ -20,7 +24,7 @@ def create_app():
     app.config['CACHE_TYPE']='redis'
     app.config['CACHE_REDIS_URL']=os.getenv('REDIS_URL')
     # app.config['CACHE_REDIS_PORT']=6379
-    app.config['RATELIMIT_STORAGE_URI']=os.getenv('RATE_LIMITER')
+    app.config['RATELIMIT_STORAGE_URI']=os.getenv('REDIS_URL')
     CORS(
     app,
     resources={
@@ -32,6 +36,7 @@ def create_app():
     from app.auto_deleter import delete_expired_links
     scheduler = BackgroundScheduler()
     db.init_app(app)
+    migrate.init_app(app,db)
     cache.init_app(app)
     limiter.init_app(app)
     # with app.app_context:
