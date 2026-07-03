@@ -49,6 +49,8 @@ def create_app():
     scheduler.start()
     from app.routes.url_short import ShortUrl
     from app.routes.health import health
+    from app.routes.test import test
     app.register_blueprint(health)
     app.register_blueprint(ShortUrl)
+    app.register_blueprint(test)
     return app
