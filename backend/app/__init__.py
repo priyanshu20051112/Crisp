@@ -25,14 +25,17 @@ def create_app():
     app.config['CACHE_REDIS_URL']=os.getenv('REDIS_URL')
     # app.config['CACHE_REDIS_PORT']=6379
     app.config['RATELIMIT_STORAGE_URI']=os.getenv('REDIS_URL')
-    CORS(
-    app,
-    resources={
-        r"/*": {
-            "origins": os.getenv("FRONTEND_URL")
+    if os.environ['FRONTEND_URL']:
+        CORS(
+                app,
+            resources={
+                r"/*": {
+                "origins": os.getenv("FRONTEND_URL")
+            }
         }
-    }
-)
+    )
+    else:
+        CORS(app)
     from app.auto_deleter import delete_expired_links
     scheduler = BackgroundScheduler()
     db.init_app(app)
