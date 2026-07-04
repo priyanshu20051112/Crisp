@@ -25,7 +25,7 @@ def create_app():
     app.config['CACHE_REDIS_URL']=os.getenv('REDIS_URL')
     # app.config['CACHE_REDIS_PORT']=6379
     app.config['RATELIMIT_STORAGE_URI']=os.getenv('REDIS_URL')
-    frontend=os.environ['FRONTEND_URL']
+    frontend=os.getenv('FRONTEND_URL')
     if frontend:
         CORS(
                 app,
